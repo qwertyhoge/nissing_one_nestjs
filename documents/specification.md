@@ -10,6 +10,8 @@
 
 ## DB設計
 
+Progress
+
 - date
 - degree (int0~4)
 - description
