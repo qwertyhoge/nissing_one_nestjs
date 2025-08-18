@@ -11,8 +11,10 @@ RDBMSであるPostgreSQLでのクエリを直打ちする必要なく、抽象�
 ## スキーマからコード生成？
 さらにここから`npx prisma generate`を実行し、このスキーマの内容からクライアント？　を生成するらしい。出力先で一度事故ったが、結局`node_modules/`内に作成している。スキーマの内容からRDBMSに正しく出力できるコードを動的に生成しているのだろう。たしかにそうでないとコードが莫大になりそうだ。
 
-そして多分このタイミングで`/backend/src/user/`が生成された。(試してみたときはmodel Userだったため？)ここにはuser.module.tsなどがあり、おそらくNestJSがこういうモジュールを寄せ集めてサーバを機能させるようにできていて、その一機能を自動生成したのではないかと思う。
+~~そして多分このタイミングで`/backend/src/user/`が生成された。(試してみたときはmodel Userだったため？)ここにはuser.module.tsなどがあり、おそらくNestJSがこういうモジュールを寄せ集めてサーバを機能させるようにできていて、その一機能を自動生成したのではないかと思う。~~
 ここには`dto/`(DTO->Data Transfer Object)というよくわからんものがあり、ここのクラスにname, emailを持たせないと実行時エラーが出た。自動採番(スキーマでは`autoincrement()`?)のIDはここには書かないらしい。
+
+`/backend/src/user/`はNestJS CLIでCRUDひな形を作った際に生成されたもの。
 
 ## バックエンドへのデータ提供
 `PrismaService`なるものを`UserService`のメンバとして持ち、this.prisma.user.create()などで呼び出せるようになっている。

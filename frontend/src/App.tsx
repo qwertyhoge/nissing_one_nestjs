@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import TestUserApis from './pages/TestUserApis';
+import TestProgressApis from './pages/TestProgressApis';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
-      <TestUserApis/>
+      <TestProgressApis/>
     </div>
   );
 }
