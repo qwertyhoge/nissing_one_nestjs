@@ -11,12 +11,15 @@ export interface Progress {
     description: string;
 }
 
-export const getUsers = async (): Promise<Progress[]> => {
+export const getProgresses = async (): Promise<Progress[]> => {
     const res = await api.get('/progress');
-    return res.data;
+    return res.data.map((p: any) => ({
+        ...p,
+        date: new Date(p.date)
+    }));
 };
 
-export const createUser = async (progress: Omit<Progress, 'id'>): Promise<Progress> => {
+export const createProgress = async (progress: Omit<Progress, 'id'>): Promise<Progress> => {
     const res = await api.post('/progress', progress);
     return res.data;
 };

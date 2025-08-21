@@ -50,8 +50,6 @@ function TestProgressApis(){
         return `${year}-${month}-${dateOfMonth}`;
     };
     const formattedDate: string = formatDate(date);
-    console.log(formattedDate);
-    console.log(progresses);
 
     return (
         <div>

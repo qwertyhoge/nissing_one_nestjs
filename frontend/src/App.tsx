@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import TestProgressApis from './pages/TestProgressApis';
+import TestProgressApis from './components/TestProgressApis';
+import ProgressCalendar from './components/ProgressCalendar';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </a>
       </header>
       <TestProgressApis/>
+      <ProgressCalendar></ProgressCalendar>
     </div>
   );
 }
