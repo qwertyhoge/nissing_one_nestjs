@@ -2,5 +2,6 @@
 `obj = {a: 10, b: "foo", c: "123"}`で、cをnumber型に変えたいと思ったとき。
 
 `obj.c = Number(obj.c)`としてしまってもよいが、mapなどと併用してオブジェクトのまま書き換えてしまいたい場合、
-`{c: Number(obj.c), ...obj}`
+`{...obj, c: Number(obj.c)}`
 としても実装できる。
+記入順に代入されるので、`{c: Number(obj.c), ...obj}`と書くとobj.cが上書きするので意味がなくなる。
