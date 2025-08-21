@@ -97,7 +97,7 @@ function TestProgressApis(){
                         value={3}
                         onClick={() => setDegree(3)}
                         name="degree"
-                        id="degree-2"
+                        id="degree-3"
                         type="radio"
                         required 
                     />
