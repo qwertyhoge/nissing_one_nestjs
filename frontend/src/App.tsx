@@ -1,30 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+import Progress from './types/Progress';
+import { getProgresses } from './api/progress';
+import { formatDateLocal } from './utils/date';
 import TestProgressApis from './components/TestProgressApis';
 import ProgressCalendar from './components/ProgressCalendar';
+import ProgressSideBar from './components/ProgressSideBar';
+import { format } from 'path';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <TestProgressApis/>
-      <ProgressCalendar></ProgressCalendar>
-    </div>
-  );
+    const [selected, setSelected] = useState<Date | null>(null);
+    const [progresses, setProgresses] = useState<Progress[]>([]);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try{
+                const fetchedProgresses = await getProgresses();
+                setProgresses(fetchedProgresses);
+            }catch(err){
+                console.error("データ取得エラー: ", err);
+            }
+        }
+        fetchData();
+    }, []);
+    
+    const progressesForDate = new Map<string, Progress[]>();
+
+    progresses.map((p: Progress) => {
+        const d: string = formatDateLocal(p.date);
+        if(progressesForDate.has(d)){
+            progressesForDate.get(d)?.push(p);
+        }else{
+            progressesForDate.set(d, [p]);
+        }
+    });
+
+    const selectedProgresses: Progress[] = selected? progressesForDate.get(formatDateLocal(selected))?? []: [];
+
+    return (
+        <div className='flex flex-col md:flex-row h-screen'>
+            <div className='h-fit flex flex-1 p-4 justify-center'>
+                <ProgressCalendar
+                    selected={selected}
+                    setSelected={setSelected}
+                    progressesForDate={progressesForDate}
+                />
+            </div>
+            <div className='w-full md:w-1/3 p-4 border-l overflow-y-scroll'>
+                <ProgressSideBar
+                    progresses={selectedProgresses}
+                    selected={selected}
+                />
+            </div>
+        </div>
+    );
 }
 
 export default App;

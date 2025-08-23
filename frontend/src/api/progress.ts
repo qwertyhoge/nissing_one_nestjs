@@ -1,15 +1,10 @@
 import axios from "axios";
+import Progress from "../types/Progress";
 
 const api = axios.create({
     baseURL: 'http://localhost:3000'
 });
 
-export interface Progress {
-    id: number;
-    date: Date;
-    degree: number;
-    description: string;
-}
 
 export const getProgresses = async (): Promise<Progress[]> => {
     const res = await api.get('/progress');
