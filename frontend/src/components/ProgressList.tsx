@@ -19,7 +19,7 @@ export default function ProgressList(props: Props){
     );
 }
 
-export function ProgressListItem({progress}: {progress: Progress}){
+function ProgressListItem({progress}: {progress: Progress}){
     return (
         <div
             key={progress.id}
