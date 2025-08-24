@@ -7,6 +7,8 @@ import UpdateProgressModal from "./UpdateProgressModal";
 type Props = {
     progresses: Progress[];
     selected: Date | null;
+    onCreate: Function;
+    onUpdate: Function;
 };
 
 type ModalState = 'create' | 'update' | 'delete' | null;
@@ -21,9 +23,18 @@ export default function ProgressSideBar(props: Props){
         setTargetProgress(null);
     };
 
+    const onCreate = (progress: Progress) => {
+        closeModal();
+        props.onCreate(progress);
+    };
+
     const startUpdate = (progress: Progress) => {
         setModalState('update');
         setTargetProgress(progress);
+    };
+    const onUpdate = (progress: Progress) => {
+        closeModal();
+        props.onUpdate(progress);
     };
 
     const startDelete = (progress: Progress) => {
@@ -42,13 +53,13 @@ export default function ProgressSideBar(props: Props){
         {(modalState === 'create' && props.selected) && (
             <CreateProgressModal
                 date={props.selected}
-                closeModal={closeModal}
+                onCreate={onCreate}
             />
         )}
         {(modalState === 'update' && props.selected && targetProgress) && (
             <UpdateProgressModal
                 date={props.selected}
-                closeModal={closeModal}
+                onUpdate={onUpdate}
                 progressToUpdate={targetProgress}
             />
         )}

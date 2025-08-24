@@ -6,20 +6,20 @@ import ProgressForm from "./ProgressForm";
 type Props = {
     date: Date,
     progressToUpdate: Progress,
-    closeModal: Function
+    onUpdate: Function
 };
 
 export default function UpdateProgressModal(props: Props){
     const handleSubmit = async ({degree, description}: {degree: Degree, description: string}): Promise<void> => {
         try{
-            await updateProgress({
+            const updated: Progress = await updateProgress({
                 degree: degree,
                 description: description,
                 date: props.date,
                 id: props.progressToUpdate.id
             });
-            props.closeModal();
-
+            
+            props.onUpdate(updated);
         }catch(err){
             console.error(err);
         }

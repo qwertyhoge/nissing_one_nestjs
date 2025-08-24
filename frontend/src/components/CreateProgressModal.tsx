@@ -1,21 +1,24 @@
 import { createProgress } from "../api/progress";
 import { Degree } from "../utils/ColorsForDegree";
 import ProgressForm from "./ProgressForm";
+import Progress from "../types/Progress";
 
 type Props = {
     date: Date,
-    closeModal: Function
+    onCreate: Function
 };
 
 export default function CreateProgressModal(props: Props){
     const handleSubmit = async ({degree, description}: {degree: Degree, description: string}): Promise<void> => {
         try{
-            await createProgress({
+            const created: Progress = await createProgress({
                 degree: degree,
                 description: description,
                 date: props.date
             });
-            props.closeModal();
+            console.log(created);
+
+            props.onCreate(created);
         }catch(err){
             console.error(err);
         }

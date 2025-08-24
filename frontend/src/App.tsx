@@ -3,10 +3,8 @@ import { useState, useEffect } from 'react';
 import Progress from './types/Progress';
 import { getProgresses } from './api/progress';
 import { formatDateLocal } from './utils/date';
-import TestProgressApis from './components/TestProgressApis';
 import ProgressCalendar from './components/ProgressCalendar';
 import ProgressSideBar from './components/ProgressSideBar';
-import { format } from 'path';
 
 function App() {
     const [selected, setSelected] = useState<Date | null>(null);
@@ -38,6 +36,20 @@ function App() {
 
     const selectedProgresses: Progress[] = selected? progressesForDate.get(formatDateLocal(selected))?? []: [];
 
+    const onCreate = (newProgress: Progress) => {
+        setProgresses([...progresses, newProgress]);
+    };
+    const onUpdate = (updatedProgress: Progress) => {
+        setProgresses(
+            progresses.map((p) => {
+                if(p.id == updatedProgress.id){
+                    return updatedProgress;
+                }
+                return p;
+            })
+        );
+    }
+
     return (
         <div className='flex flex-col md:flex-row h-screen'>
             <div className='h-fit flex flex-1 p-4 justify-center'>
@@ -51,6 +63,8 @@ function App() {
                 <ProgressSideBar
                     progresses={selectedProgresses}
                     selected={selected}
+                    onCreate={onCreate}
+                    onUpdate={onUpdate}
                 />
             </div>
         </div>
