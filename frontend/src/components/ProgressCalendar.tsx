@@ -31,7 +31,7 @@ export default function ProgressCalendar(props: Props){
                                 return <div
                                     key={progress.id}
                                     style={{backgroundColor: getColorForDegree(progress.degree)}}
-                                    className="w-1 h-1 rounded-full"
+                                    className="w-1 h-1 rounded-full ml-px mr-px"
                                 >
                                 </div>
                             })
