@@ -19,3 +19,8 @@ export const createProgress = async (progress: Omit<Progress, 'id'>): Promise<Pr
     return res.data;
 };
 
+export const updateProgress = async(progress: Progress): Promise<Progress> => {
+    const res = await api.patch(`/progress/${progress.id}`, progress);
+    return res.data;
+}
+

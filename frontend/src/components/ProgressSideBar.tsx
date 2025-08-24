@@ -2,19 +2,34 @@ import { useState } from "react";
 import ProgressList from "./ProgressList";
 import Progress from "../types/Progress";
 import CreateProgressModal from "./CreateProgressModal";
+import UpdateProgressModal from "./UpdateProgressModal";
 
 type Props = {
     progresses: Progress[];
     selected: Date | null;
 };
 
+type ModalState = 'create' | 'update' | 'delete' | null;
+
 export default function ProgressSideBar(props: Props){
-    const [modalState, setModalState] = useState<
-        {type: 'create', date: Date} |
-        null
-    >(null);
+    const [modalState, setModalState] = useState<ModalState>(null);
+    const [targetProgress, setTargetProgress] = useState<Progress | null>(null);
 
     const selected = props.selected;
+    const closeModal = () => {
+        setModalState(null);
+        setTargetProgress(null);
+    };
+
+    const startUpdate = (progress: Progress) => {
+        setModalState('update');
+        setTargetProgress(progress);
+    };
+
+    const startDelete = (progress: Progress) => {
+        setModalState('delete');
+        setTargetProgress(progress);
+    };
 
     if(!selected){
         return <p className="text-center">Select a date.</p>;
@@ -24,22 +39,29 @@ export default function ProgressSideBar(props: Props){
     <div
         className="flex flex-col content-center flex-wrap"
     >
-        {(modalState?.type === 'create' && props.selected) && (
+        {(modalState === 'create' && props.selected) && (
             <CreateProgressModal
                 date={props.selected}
+                closeModal={closeModal}
+            />
+        )}
+        {(modalState === 'update' && props.selected && targetProgress) && (
+            <UpdateProgressModal
+                date={props.selected}
+                closeModal={closeModal}
+                progressToUpdate={targetProgress}
             />
         )}
         <div>
             <ProgressList
                 progresses={props.progresses}
                 selected={props.selected}
+                startUpdate={startUpdate}
+                startDelete={startDelete}
             />
             <button
                 className="relative mt-4 w-12 h-12 rounded-full border shadow-sm text-lg text-gray-500"
-                onClick={() => {setModalState({
-                    type: 'create',
-                    date: selected
-                })}}
+                onClick={() => {setModalState('create')}}
             >
                 <div className="absolute h-4 w-0 border border-gray-400 m-auto top-0 right-0 left-0 bottom-0">
                 </div>

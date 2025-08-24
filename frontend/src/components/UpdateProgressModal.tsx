@@ -1,21 +1,25 @@
-import { createProgress } from "../api/progress";
+import { updateProgress } from "../api/progress";
+import Progress from "../types/Progress";
 import { Degree } from "../utils/ColorsForDegree";
 import ProgressForm from "./ProgressForm";
 
 type Props = {
     date: Date,
+    progressToUpdate: Progress,
     closeModal: Function
 };
 
-export default function CreateProgressModal(props: Props){
+export default function UpdateProgressModal(props: Props){
     const handleSubmit = async ({degree, description}: {degree: Degree, description: string}): Promise<void> => {
         try{
-            await createProgress({
+            await updateProgress({
                 degree: degree,
                 description: description,
-                date: props.date
+                date: props.date,
+                id: props.progressToUpdate.id
             });
             props.closeModal();
+
         }catch(err){
             console.error(err);
         }
@@ -27,6 +31,7 @@ export default function CreateProgressModal(props: Props){
                 <ProgressForm
                     handleSubmit={handleSubmit}
                     selectedDate={props.date}
+                    currentProgress={props.progressToUpdate}
                 />
             </div>
         </div>

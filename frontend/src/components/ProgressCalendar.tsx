@@ -27,10 +27,13 @@ export default function ProgressCalendar(props: Props){
                             props.progressesForDate.get(formatDateLocal(date))?.map((progress) => {
                                 console.log(date);
                                 console.log(formatDateLocal(date));
-                                console.log(props.progressesForDate.get(formatDateLocal(date))?.map((progress) => {
-                                    return <div style={{color: getColorForDegree(progress.degree)}}>{progress.id}</div>
-                                }))
-                                return <div style={{color: getColorForDegree(progress.degree)}}>{progress.id}</div>
+
+                                return <div
+                                    key={progress.id}
+                                    style={{backgroundColor: getColorForDegree(progress.degree)}}
+                                    className="w-1 h-1 rounded-full"
+                                >
+                                </div>
                             })
                         }
                     </div>

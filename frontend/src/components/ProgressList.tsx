@@ -3,12 +3,17 @@ import Progress from "../types/Progress";
 type Props = {
     progresses: Progress[];
     selected: Date | null;
+    startUpdate: Function,
+    startDelete: Function
 };
 
 export default function ProgressList(props: Props){
     const progressListItems: React.ReactElement[] = props.progresses.map((p: Progress) => {
         return (
-            <ProgressListItem progress={p}/>
+            <ProgressListItem
+                progress={p}
+                handleClick={props.startUpdate}
+            />
         );
     });
 
@@ -19,15 +24,18 @@ export default function ProgressList(props: Props){
     );
 }
 
-function ProgressListItem({progress}: {progress: Progress}){
+function ProgressListItem({progress, handleClick}: {progress: Progress, handleClick: Function}){
     return (
         <div
             key={progress.id}
+            className="cursor-pointer"
+            onClick={(e) => {
+                handleClick(progress);
+            }}
         >
             <div>
-                
+                {progress.description}
             </div>
-            {progress.description}
         </div>
     );
 }
