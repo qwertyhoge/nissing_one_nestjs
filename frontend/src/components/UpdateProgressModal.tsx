@@ -34,6 +34,7 @@ export default function UpdateProgressModal(props: Props){
                     selectedDate={props.date}
                     currentProgress={props.progressToUpdate}
                     onClose={props.onClose}
+                    submitText="Update"
                 />
             </div>
         </div>

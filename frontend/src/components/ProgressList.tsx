@@ -29,7 +29,7 @@ function ProgressListItem({progress, handleClick}: {progress: Progress, handleCl
     return (
         <div
             key={progress.id}
-            className="flex w-full border rounded p-2 m-2 items-center cursor-pointer"
+            className="flex w-full border rounded p-2 m-2 items-center cursor-pointer shadow-sm"
             onClick={(e) => {
                 handleClick(progress);
             }}

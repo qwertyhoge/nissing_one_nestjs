@@ -32,6 +32,7 @@ export default function CreateProgressModal(props: Props){
                     handleSubmit={handleSubmit}
                     selectedDate={props.date}
                     onClose={props.onClose}
+                    submitText="Create"
                 />
             </div>
         </div>
