@@ -9,9 +9,10 @@ type Props = {
     selected: Date | null;
     onCreate: Function;
     onUpdate: Function;
+    onDelete: Function;
 };
 
-type ModalState = 'create' | 'update' | 'delete' | null;
+type ModalState = 'create' | 'update' | null;
 
 export default function ProgressSideBar(props: Props){
     const [modalState, setModalState] = useState<ModalState>(null);
@@ -37,10 +38,10 @@ export default function ProgressSideBar(props: Props){
         props.onUpdate(progress);
     };
 
-    const startDelete = (progress: Progress) => {
-        setModalState('delete');
-        setTargetProgress(progress);
-    };
+    const onDelete = (progress: Progress) => {
+        closeModal();
+        props.onDelete(progress);
+    }
 
     if(!selected){
         return <p className="text-center">Select a date.</p>;
@@ -59,10 +60,10 @@ export default function ProgressSideBar(props: Props){
         )}
         {(modalState === 'update' && props.selected && targetProgress) && (
             <UpdateProgressModal
-                date={props.selected}
                 onUpdate={onUpdate}
                 progressToUpdate={targetProgress}
                 onClose={closeModal}
+                onDelete={onDelete}
             />
         )}
         <div className="w-full">
@@ -70,7 +71,6 @@ export default function ProgressSideBar(props: Props){
                 progresses={props.progresses}
                 selected={props.selected}
                 startUpdate={startUpdate}
-                startDelete={startDelete}
             />
             <div className="text-center">
                 <button

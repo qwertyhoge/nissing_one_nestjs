@@ -4,8 +4,7 @@ import { getIconForDegree } from "../utils/iconsForDegree";
 type Props = {
     progresses: Progress[];
     selected: Date | null;
-    startUpdate: Function,
-    startDelete: Function
+    startUpdate: Function
 };
 
 export default function ProgressList(props: Props){

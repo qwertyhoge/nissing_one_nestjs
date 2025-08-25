@@ -48,7 +48,13 @@ function App() {
                 return p;
             })
         );
-    }
+    };
+
+    const onDelete = (deletedProgress: Progress) => {
+        setProgresses(
+            progresses.filter(p => p.id !== deletedProgress.id)
+        );
+    };
 
     return (
         <div className='flex flex-col md:flex-row h-screen'>
@@ -65,6 +71,7 @@ function App() {
                     selected={selected}
                     onCreate={onCreate}
                     onUpdate={onUpdate}
+                    onDelete={onDelete}
                 />
             </div>
         </div>

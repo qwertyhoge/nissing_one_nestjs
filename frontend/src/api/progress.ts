@@ -45,3 +45,9 @@ export const updateProgress = async(progress: Progress): Promise<Progress> => {
     return dataToProgress(res.data);
 }
 
+export const deleteProgress = async(id: number): Promise<Progress> => {
+    const res = await api.delete(`/progress/${id}`);
+    
+    return dataToProgress(res.data);
+};
+
