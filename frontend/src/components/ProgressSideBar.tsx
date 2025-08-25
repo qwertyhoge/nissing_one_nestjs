@@ -54,6 +54,7 @@ export default function ProgressSideBar(props: Props){
             <CreateProgressModal
                 date={props.selected}
                 onCreate={onCreate}
+                onClose={closeModal}
             />
         )}
         {(modalState === 'update' && props.selected && targetProgress) && (
@@ -61,24 +62,27 @@ export default function ProgressSideBar(props: Props){
                 date={props.selected}
                 onUpdate={onUpdate}
                 progressToUpdate={targetProgress}
+                onClose={closeModal}
             />
         )}
-        <div>
+        <div className="w-full">
             <ProgressList
                 progresses={props.progresses}
                 selected={props.selected}
                 startUpdate={startUpdate}
                 startDelete={startDelete}
             />
-            <button
-                className="relative mt-4 w-12 h-12 rounded-full border shadow-sm text-lg text-gray-500"
-                onClick={() => {setModalState('create')}}
-            >
-                <div className="absolute h-4 w-0 border border-gray-400 m-auto top-0 right-0 left-0 bottom-0">
-                </div>
-                <div className="absolute h-0 w-4 border border-gray-400 m-auto top-0 right-0 left-0 bottom-0">
-                </div>
-            </button>
+            <div className="text-center">
+                <button
+                    className="relative mt-4 w-12 h-12 rounded-full border shadow-sm text-lg text-gray-500"
+                    onClick={() => {setModalState('create')}}
+                >
+                    <div className="absolute h-4 w-0 border border-gray-400 m-auto top-0 right-0 left-0 bottom-0">
+                    </div>
+                    <div className="absolute h-0 w-4 border border-gray-400 m-auto top-0 right-0 left-0 bottom-0">
+                    </div>
+                </button>
+            </div>
         </div>
     </div>
     )

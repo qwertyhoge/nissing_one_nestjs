@@ -3,7 +3,7 @@ import Calendar from "react-calendar";
 import Progress from "../types/Progress";
 import "react-calendar/dist/Calendar.css";
 import { formatDateLocal } from "../utils/date";
-import { getColorForDegree } from "../utils/ColorsForDegree";
+import { getColorForDegree } from "../utils/colorsForDegree";
 
 type Props = {
     selected: Date | null;

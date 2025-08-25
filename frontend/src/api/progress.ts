@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import Progress from "../types/Progress";
-import { Degree } from "../utils/ColorsForDegree";
+import { Degree } from "../utils/colorsForDegree";
 
 const api = axios.create({
     baseURL: 'http://localhost:3000'

@@ -1,12 +1,13 @@
 import { updateProgress } from "../api/progress";
 import Progress from "../types/Progress";
-import { Degree } from "../utils/ColorsForDegree";
+import { Degree } from "../utils/colorsForDegree";
 import ProgressForm from "./ProgressForm";
 
 type Props = {
-    date: Date,
-    progressToUpdate: Progress,
-    onUpdate: Function
+    date: Date;
+    progressToUpdate: Progress;
+    onUpdate: Function;
+    onClose: Function;
 };
 
 export default function UpdateProgressModal(props: Props){
@@ -18,7 +19,7 @@ export default function UpdateProgressModal(props: Props){
                 date: props.date,
                 id: props.progressToUpdate.id
             });
-            
+
             props.onUpdate(updated);
         }catch(err){
             console.error(err);
@@ -32,6 +33,7 @@ export default function UpdateProgressModal(props: Props){
                     handleSubmit={handleSubmit}
                     selectedDate={props.date}
                     currentProgress={props.progressToUpdate}
+                    onClose={props.onClose}
                 />
             </div>
         </div>

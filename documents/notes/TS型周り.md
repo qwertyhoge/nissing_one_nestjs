@@ -15,3 +15,17 @@ https://qiita.com/_ken_/items/5f90aa1ea776bc03857b
 # ??演算子
 && ||あたりの短絡演算子の仲間で、左辺がnull、undefinedの場合に右辺を返す演算子。
 possibly nullの場合に便利。
+
+# png画像等のimport
+tsでは元々.pngなど画像ファイルをモジュールとして認識していないので、importして使いたい場合はモジュールとして型を宣言してやる必要がある。
+CRAでは`xxxx.d.ts`というファイルをsrc/に配置し、その内部に次のような宣言を加えることでモジュールとして扱える。
+
+```
+declare module "*.jpg" {
+  const value: string;
+  export default value;
+}
+```
+
+単にパスとしての参照をしていてこれだけでは画像情報は入っていないはずだが、これは多分バンドル時にコードに組み込まれるのだろう。
+

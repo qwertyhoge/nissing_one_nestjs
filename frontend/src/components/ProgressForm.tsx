@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Degree } from "../utils/ColorsForDegree"
+import { Degree } from "../utils/colorsForDegree";
 import Progress from "../types/Progress";
 
 type Props = {
     handleSubmit: Function;
+    onClose: Function;
     selectedDate: Date;
     currentProgress?: Progress
 };

@@ -1,4 +1,4 @@
-import { Degree } from "../utils/ColorsForDegree";
+import { Degree } from "../utils/colorsForDegree";
 
 export default interface Progress {
     id: number;

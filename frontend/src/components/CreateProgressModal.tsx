@@ -1,11 +1,12 @@
 import { createProgress } from "../api/progress";
-import { Degree } from "../utils/ColorsForDegree";
+import { Degree } from "../utils/colorsForDegree";
 import ProgressForm from "./ProgressForm";
 import Progress from "../types/Progress";
 
 type Props = {
-    date: Date,
-    onCreate: Function
+    date: Date;
+    onCreate: Function;
+    onClose: Function;
 };
 
 export default function CreateProgressModal(props: Props){
@@ -30,6 +31,7 @@ export default function CreateProgressModal(props: Props){
                 <ProgressForm
                     handleSubmit={handleSubmit}
                     selectedDate={props.date}
+                    onClose={props.onClose}
                 />
             </div>
         </div>

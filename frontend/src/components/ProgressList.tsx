@@ -1,4 +1,5 @@
 import Progress from "../types/Progress";
+import { getIconForDegree } from "../utils/iconsForDegree";
 
 type Props = {
     progresses: Progress[];
@@ -18,8 +19,8 @@ export default function ProgressList(props: Props){
     });
 
     return (
-        <div className="w-fit">
-            {props.progresses.length > 0? progressListItems: "empty"}
+        <div className="w-full">
+            {props.progresses.length > 0? progressListItems: <div className="text-center">empty</div>}
         </div>
     );
 }
@@ -28,12 +29,17 @@ function ProgressListItem({progress, handleClick}: {progress: Progress, handleCl
     return (
         <div
             key={progress.id}
-            className="cursor-pointer"
+            className="flex w-full border rounded p-2 m-2 items-center cursor-pointer"
             onClick={(e) => {
                 handleClick(progress);
             }}
         >
-            <div>
+            <img src={getIconForDegree(progress.degree)}
+                className="w-8 h-8 border rounded-full p-1 m-2"
+            />
+            <div
+                className="align-middle "
+            >
                 {progress.description}
             </div>
         </div>
